@@ -8,7 +8,68 @@
 // if each and every letter of the word is correctly placed, then return winning message
 // if 6 tries are over thwn return try again message.
 
-const words = ["peace", "faith", "grace", "mercy", "truth", "power", "glory", "honor", "favor"];
+const words = [
+    "happy",
+    "sorry",
+    "smile",
+    "trust",
+    "sweet",
+    "bliss",
+    "brave",
+    "loyal",
+    "faith",
+    "peace",
+    "cheer",
+    "alive",
+    "clear",
+    "bold",
+    "proud",
+    "smell",
+    "adore",
+    "amour",
+    "sweet",
+    "heart",
+    "affix",
+    "flame",
+    "grace",
+    "mercy",
+    "power",
+    "glory",
+    "honor",
+    "glass",
+    "mouse",
+    "fairy",
+    "lemon",
+    "oasis",
+    "sunny",
+    "Unity",
+    "earth",
+    "grape",
+    "Dream",
+    "quite",
+    "magic",
+    "light",
+    "snack",
+    "overt",
+    "break",
+    "chime",
+    "birth",
+    "amber",
+    "swift",
+    "ocean",
+    "world",
+    "water",
+    "green",
+    "fresh",
+    "jolly",
+    "cloud",
+    "music",
+    "fleet",
+    "horse",
+    "jelly",
+    "apple",
+    "queen"
+]
 let guessNo = 0;
 let letterIdx = 0;
 let guessedWord = "";
@@ -71,8 +132,6 @@ function checkWord(){
     let isPresent = new Request(`https://api.wordnik.com/v4/word.json/${guessedWord}/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5`);
     fetch(isPresent)
     .then((response) => {
-        // console.log(response);
-        // return response.json();
         if(response.status === 404){
             console.log("enter a valid word.");
             for(let i = 0; i < randomWord.length; i++){
@@ -112,6 +171,7 @@ function checkWord(){
                 }
             }
         }
+        guessedWord = "";
     }
     console.log(correct_places);
     if(correct_places === randomWord.length){
@@ -142,60 +202,6 @@ function checkWord(){
     shadeButtons();
         }
     })
-
-    // let correct_places = 0;
-    // for(let i = 0; i < randomWord.length; i++){
-    //     let letterRow = document.getElementsByClassName("word")[guessNo];
-    //     let letterContainer = letterRow.children[i];
-    //     let letter = letterContainer.innerText;
-    //     letter = letter.toLowerCase();
-    //     if(letter === randomWord[i]){
-    //         console.log(letter, randomWord[i]);
-    //         letterContainer.classList.add("correct");
-    //         shadeButtons(letter, "correct");
-    //         correct_places++;
-    //     }
-    //     else{
-    //         letterContainer.classList.add("notpresent");
-    //         shadeButtons(letter, "notpresent");
-    //         for(let j = 0; j < randomWord.length; j++){
-    //             if(letter === randomWord[j]){
-    //                 console.log(letter, randomWord[j]);
-    //                 letterContainer.classList.add("present");
-    //                 shadeButtons(letter, "present");
-    //                 letterContainer.classList.remove("notpresent");
-    //                 break;
-    //             }
-    //         }
-    //     }
-    // }
-    // console.log(correct_places);
-    // if(correct_places === randomWord.length){
-    //     let youwonContainer = document.querySelector(".youwon");
-    //     for(let i = 0; i < randomWord.length; i++){
-    //         let letterRow = document.querySelector(".random-word");
-    //         let letterContainer = letterRow.children[i];
-    //         letterContainer.innerText = randomWord[i];
-    //     }
-    //     youwonContainer.style.display = "flex";
-    //     return;
-    // }
-
-    // if(guessNo === 5){
-    //     console.log("haar gya tu bhai!")
-    //     let gameoverContainer = document.querySelector(".gameover");
-    //     for(let i = 0; i < randomWord.length; i++){
-    //         let letterRow = document.querySelectorAll(".random-word");
-    //         let letterContainer = letterRow[1].children[i];
-    //         letterContainer.innerText = randomWord[i];
-    //     }
-    //     gameoverContainer.style.display = "flex";
-    //     return;
-    // }
-
-    // guessNo++;
-    // letterIdx = 0;
-    // shadeButtons();
 }
 
 function clear(){
@@ -204,6 +210,7 @@ function clear(){
         let letterRow = document.getElementsByClassName("word")[guessNo];
         let letterContainer = letterRow.children[letterIdx];
         letterContainer.innerText = "";
+        guessedWord = guessedWord.slice(0, -1);
     }
 }
 
